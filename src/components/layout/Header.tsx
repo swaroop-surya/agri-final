@@ -32,6 +32,7 @@ interface HeaderProps {
   currentUser: AuthUser | null;
   onOpenAuthModal: (mode: 'login' | 'register') => void;
   onLogout: () => void;
+  onNavigateToLanding?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -49,6 +50,7 @@ export const Header: React.FC<HeaderProps> = ({
   currentUser,
   onOpenAuthModal,
   onLogout,
+  onNavigateToLanding,
 }) => {
   const [showAlertsDropdown, setShowAlertsDropdown] = useState(false);
   const [showSeasonDropdown, setShowSeasonDropdown] = useState(false);
@@ -79,19 +81,39 @@ export const Header: React.FC<HeaderProps> = ({
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
 
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-[#2d6a4f] flex items-center justify-center text-[#d8f3dc] shadow-inner border border-[#40916c] shrink-0">
-              <Sprout className="w-4 h-4 sm:w-5 sm:h-5" />
-            </div>
-
-            <div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="font-bold text-sm sm:text-base tracking-tight text-white">AgriVision</span>
-                <span className="hidden sm:inline-block text-[9px] uppercase font-semibold px-1.5 py-0.5 rounded bg-[#2d6a4f]/70 text-[#d8f3dc] border border-[#52b788]/40">
-                  v4.2
-                </span>
+            <button
+              type="button"
+              onClick={onNavigateToLanding}
+              className="flex items-center gap-2.5 text-left cursor-pointer group"
+              title="Return to AgriVision Landing Page"
+            >
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-[#2d6a4f] group-hover:bg-[#387a5a] flex items-center justify-center text-[#d8f3dc] shadow-inner border border-[#40916c] shrink-0 transition-colors">
+                <Sprout className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <p className="text-[10px] text-[#a7c5b2] hidden md:block">Smart Agriculture System</p>
-            </div>
+
+              <div>
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="font-bold text-sm sm:text-base tracking-tight text-white group-hover:text-[#a7f3d0] transition-colors">
+                    AgriVision
+                  </span>
+                  <span className="hidden sm:inline-block text-[9px] uppercase font-semibold px-1.5 py-0.5 rounded bg-[#2d6a4f]/70 text-[#d8f3dc] border border-[#52b788]/40">
+                    v4.2
+                  </span>
+                </div>
+                <p className="text-[10px] text-[#a7c5b2] hidden md:block">Smart Agriculture System</p>
+              </div>
+            </button>
+
+            {onNavigateToLanding && (
+              <button
+                type="button"
+                onClick={onNavigateToLanding}
+                className="hidden xl:flex items-center gap-1 px-2 py-1 text-[11px] font-semibold text-[#a7c5b2] hover:text-white bg-[#0f2a1b] hover:bg-[#1b4332] rounded border border-[#2d6a4f]/50 transition-colors cursor-pointer"
+                title="Return to Landing Page"
+              >
+                <span>← Home</span>
+              </button>
+            )}
           </div>
 
           {/* Center: Role Switcher & Season selector */}

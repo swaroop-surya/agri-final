@@ -11,6 +11,7 @@ import {
   INITIAL_ALERTS,
   INITIAL_TASKS,
 } from './data/mockAgricultureData';
+import { LandingPage } from './components/landing/LandingPage';
 import { Header } from './components/layout/Header';
 import { Sidebar } from './components/layout/Sidebar';
 import { AdminDashboard } from './components/admin/AdminDashboard';
@@ -33,6 +34,9 @@ import {
 } from 'lucide-react';
 
 export default function App() {
+  // Navigation mode: 'landing' (public marketing & demo page) vs 'dashboard' (authenticated console)
+  const [viewMode, setViewMode] = useState<'landing' | 'dashboard'>('landing');
+
   const [role, setRole] = useState<UserRole>('admin');
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [plots, setPlots] = useState<Plot[]>(INITIAL_PLOTS);
@@ -129,6 +133,42 @@ export default function App() {
     setAuthModalOpen(true);
   };
 
+  const handleQuickDemoLogin = (demoRole: UserRole) => {
+    if (demoRole === 'admin') {
+      const adminUser: AuthUser = {
+        id: 'user-admin',
+        name: 'Eleanor Vance',
+        email: 'e.vance@agrivision.gov',
+        role: 'admin',
+        title: 'Operations Director',
+        region: 'District 4 - West Valley',
+        avatarInitials: 'EV',
+      };
+      setCurrentUser(adminUser);
+      setRole('admin');
+      setActiveTab('overview');
+      setViewMode('dashboard');
+      showToast('Welcome, Eleanor Vance! Administrator Console ready.', 'success');
+    } else {
+      const farmerUser: AuthUser = {
+        id: 'user-farmer',
+        name: 'Marcus Henderson',
+        email: 'm.henderson@crestfarms.org',
+        role: 'farmer',
+        title: 'Henderson Crest Farm',
+        farmName: 'Henderson Crest Farm',
+        region: 'District 4 - West Valley',
+        primaryCrop: 'Corn / Maize',
+        avatarInitials: 'MH',
+      };
+      setCurrentUser(farmerUser);
+      setRole('farmer');
+      setActiveTab('field-overview');
+      setViewMode('dashboard');
+      showToast('Welcome, Marcus Henderson! Connected to Henderson Crest Farm Telemetry.', 'success');
+    }
+  };
+
   const handleLoginSuccess = (user: AuthUser) => {
     setCurrentUser(user);
     setRole(user.role);
@@ -137,6 +177,9 @@ export default function App() {
     } else {
       setActiveTab('field-overview');
     }
+
+    // Direct user to the interactive dashboard
+    setViewMode('dashboard');
 
     // If user registered a new farm, append to the farmer registry so it appears in the table!
     if (user.role === 'farmer' && user.farmName) {
@@ -166,7 +209,8 @@ export default function App() {
 
   const handleLogout = () => {
     setCurrentUser(null);
-    showToast('Signed out of AgriVision workstation.', 'info');
+    setViewMode('landing');
+    showToast('Signed out of AgriVision console.', 'info');
   };
 
   // Toggle plot valve directly
@@ -251,156 +295,170 @@ export default function App() {
   const unacknowledgedAlertsCount = alerts.filter((a) => !a.acknowledged).length;
 
   return (
-    <div className="min-h-screen bg-[#f6f7f4] text-[#1c2e22] flex flex-col antialiased pb-16 lg:pb-0">
-      {/* Top Navigation & Status Bar */}
-      <Header
-        role={role}
-        onRoleChange={handleRoleChange}
-        alerts={alerts}
-        onAcknowledgeAlert={handleAcknowledgeAlert}
-        onOpenExportModal={() => setExportModalOpen(true)}
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        selectedSeason={selectedSeason}
-        onSeasonChange={setSelectedSeason}
-        onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
-        mobileMenuOpen={mobileMenuOpen}
-        currentUser={currentUser}
-        onOpenAuthModal={handleOpenAuthModal}
-        onLogout={handleLogout}
-      />
-
-      {/* Main App Layout */}
-      <div className="flex-1 flex max-w-7xl w-full mx-auto">
-        {/* Sidebar (Desktop Permanent + Mobile Drawer) */}
-        <Sidebar
-          role={role}
-          activeTab={activeTab}
-          onTabChange={(tab) => {
-            setActiveTab(tab);
-            setMobileMenuOpen(false);
-          }}
-          unreadAlertCount={unacknowledgedAlertsCount}
-          activeIrrigationCount={activeIrrigationCount}
-          mobileOpen={mobileMenuOpen}
-          onCloseMobile={() => setMobileMenuOpen(false)}
+    <div className="min-h-screen bg-[#f6f7f4] text-[#1c2e22] flex flex-col antialiased">
+      {viewMode === 'landing' ? (
+        /* Public Landing Page with Home, About, Features, Services, Login, Get Started */
+        <LandingPage
+          onOpenAuthModal={handleOpenAuthModal}
+          onQuickDemoLogin={handleQuickDemoLogin}
+          currentUser={currentUser}
+          onGoToDashboard={() => setViewMode('dashboard')}
         />
+      ) : (
+        /* Authenticated Dual-Tier Agriculture Management Dashboard */
+        <div className="flex-1 flex flex-col pb-16 lg:pb-0">
+          {/* Top Navigation & Status Bar */}
+          <Header
+            role={role}
+            onRoleChange={handleRoleChange}
+            alerts={alerts}
+            onAcknowledgeAlert={handleAcknowledgeAlert}
+            onOpenExportModal={() => setExportModalOpen(true)}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            selectedSeason={selectedSeason}
+            onSeasonChange={setSelectedSeason}
+            onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
+            mobileMenuOpen={mobileMenuOpen}
+            currentUser={currentUser}
+            onOpenAuthModal={handleOpenAuthModal}
+            onLogout={handleLogout}
+            onNavigateToLanding={() => setViewMode('landing')}
+          />
 
-        {/* Content Body */}
-        <main className="flex-1 p-3 sm:p-5 lg:p-7 min-w-0 overflow-x-hidden">
-          {role === 'admin' ? (
-            <AdminDashboard
+          {/* Main App Layout */}
+          <div className="flex-1 flex max-w-7xl w-full mx-auto">
+            {/* Sidebar (Desktop Permanent + Mobile Drawer) */}
+            <Sidebar
+              role={role}
               activeTab={activeTab}
-              farmers={farmers}
-              plots={plots}
-              alerts={alerts}
-              onAcknowledgeAlert={handleAcknowledgeAlert}
-              onSelectFarmer={(farmer) => setSelectedFarmerForDetail(farmer)}
-              onOpenIrrigationModal={(plotId) => {
-                setIrrigationTargetPlotId(plotId || plots[0]?.id || '');
-                setIrrigationModalOpen(true);
+              onTabChange={(tab) => {
+                setActiveTab(tab);
+                setMobileMenuOpen(false);
               }}
-              searchFilter={searchQuery}
+              unreadAlertCount={unacknowledgedAlertsCount}
+              activeIrrigationCount={activeIrrigationCount}
+              mobileOpen={mobileMenuOpen}
+              onCloseMobile={() => setMobileMenuOpen(false)}
             />
-          ) : (
-            <FarmerDashboard
-              activeTab={activeTab}
-              plots={plots}
-              onTogglePlotValve={handleTogglePlotValve}
-              onOpenIrrigationModal={(plotId) => {
-                setIrrigationTargetPlotId(plotId);
-                setIrrigationModalOpen(true);
-              }}
-              onOpenNewTaskModal={() => setNewTaskModalOpen(true)}
-              tasks={tasks}
-              onToggleTaskComplete={handleToggleTaskComplete}
-            />
-          )}
-        </main>
-      </div>
 
-      {/* Mobile Bottom Quick-Navigation Bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#e1e6dc] px-3 py-1.5 flex items-center justify-around shadow-lg">
-        {role === 'admin' ? (
-          <>
-            <button
-              onClick={() => setActiveTab('overview')}
-              className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                activeTab === 'overview' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
-              }`}
-            >
-              <LayoutDashboard className="w-4 h-4 mb-0.5" />
-              <span>Overview</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('farmers')}
-              className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                activeTab === 'farmers' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
-              }`}
-            >
-              <Users className="w-4 h-4 mb-0.5" />
-              <span>Farmers</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('irrigation')}
-              className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                activeTab === 'irrigation' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
-              }`}
-            >
-              <Droplets className="w-4 h-4 mb-0.5" />
-              <span>Water</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('alerts')}
-              className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                activeTab === 'alerts' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
-              }`}
-            >
-              <AlertTriangle className="w-4 h-4 mb-0.5" />
-              <span>Alerts</span>
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              onClick={() => setActiveTab('field-overview')}
-              className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                activeTab === 'field-overview' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
-              }`}
-            >
-              <LayoutDashboard className="w-4 h-4 mb-0.5" />
-              <span>Field</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('telemetry')}
-              className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                activeTab === 'telemetry' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
-              }`}
-            >
-              <Layers className="w-4 h-4 mb-0.5" />
-              <span>Telemetry</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('irrigation')}
-              className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                activeTab === 'irrigation' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
-              }`}
-            >
-              <Droplets className="w-4 h-4 mb-0.5" />
-              <span>Irrigation</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('weather')}
-              className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                activeTab === 'weather' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
-              }`}
-            >
-              <CloudSun className="w-4 h-4 mb-0.5" />
-              <span>Weather</span>
-            </button>
-          </>
-        )}
-      </div>
+            {/* Content Body */}
+            <main className="flex-1 p-3 sm:p-5 lg:p-7 min-w-0 overflow-x-hidden">
+              {role === 'admin' ? (
+                <AdminDashboard
+                  activeTab={activeTab}
+                  farmers={farmers}
+                  plots={plots}
+                  alerts={alerts}
+                  onAcknowledgeAlert={handleAcknowledgeAlert}
+                  onSelectFarmer={(farmer) => setSelectedFarmerForDetail(farmer)}
+                  onOpenIrrigationModal={(plotId) => {
+                    setIrrigationTargetPlotId(plotId || plots[0]?.id || '');
+                    setIrrigationModalOpen(true);
+                  }}
+                  searchFilter={searchQuery}
+                />
+              ) : (
+                <FarmerDashboard
+                  activeTab={activeTab}
+                  plots={plots}
+                  onTogglePlotValve={handleTogglePlotValve}
+                  onOpenIrrigationModal={(plotId) => {
+                    setIrrigationTargetPlotId(plotId);
+                    setIrrigationModalOpen(true);
+                  }}
+                  onOpenNewTaskModal={() => setNewTaskModalOpen(true)}
+                  tasks={tasks}
+                  onToggleTaskComplete={handleToggleTaskComplete}
+                />
+              )}
+            </main>
+          </div>
+
+          {/* Mobile Bottom Quick-Navigation Bar */}
+          <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#e1e6dc] px-3 py-1.5 flex items-center justify-around shadow-lg">
+            {role === 'admin' ? (
+              <>
+                <button
+                  onClick={() => setActiveTab('overview')}
+                  className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
+                    activeTab === 'overview' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                  }`}
+                >
+                  <LayoutDashboard className="w-4 h-4 mb-0.5" />
+                  <span>Overview</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('farmers')}
+                  className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
+                    activeTab === 'farmers' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                  }`}
+                >
+                  <Users className="w-4 h-4 mb-0.5" />
+                  <span>Farmers</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('irrigation')}
+                  className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
+                    activeTab === 'irrigation' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                  }`}
+                >
+                  <Droplets className="w-4 h-4 mb-0.5" />
+                  <span>Water</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('alerts')}
+                  className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
+                    activeTab === 'alerts' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                  }`}
+                >
+                  <AlertTriangle className="w-4 h-4 mb-0.5" />
+                  <span>Alerts</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => setActiveTab('field-overview')}
+                  className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
+                    activeTab === 'field-overview' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                  }`}
+                >
+                  <LayoutDashboard className="w-4 h-4 mb-0.5" />
+                  <span>Field</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('telemetry')}
+                  className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
+                    activeTab === 'telemetry' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                  }`}
+                >
+                  <Layers className="w-4 h-4 mb-0.5" />
+                  <span>Telemetry</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('irrigation')}
+                  className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
+                    activeTab === 'irrigation' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                  }`}
+                >
+                  <Droplets className="w-4 h-4 mb-0.5" />
+                  <span>Irrigation</span>
+                </button>
+                <button
+                  onClick={() => setActiveTab('weather')}
+                  className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
+                    activeTab === 'weather' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                  }`}
+                >
+                  <CloudSun className="w-4 h-4 mb-0.5" />
+                  <span>Weather</span>
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Floating Toast Notification */}
       {toastMessage && (
