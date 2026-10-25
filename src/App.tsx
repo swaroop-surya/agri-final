@@ -21,6 +21,7 @@ import { FarmerDetailModal } from './components/modals/FarmerDetailModal';
 import { ExportReportModal } from './components/modals/ExportReportModal';
 import { NewTaskModal } from './components/modals/NewTaskModal';
 import { AuthModal } from './components/auth/AuthModal';
+import { SignoutSuccessModal } from './components/modals/SignoutSuccessModal';
 import {
   CheckCircle2,
   AlertCircle,
@@ -70,6 +71,11 @@ export default function App() {
   const [selectedFarmerForDetail, setSelectedFarmerForDetail] = useState<Farmer | null>(null);
   const [exportModalOpen, setExportModalOpen] = useState<boolean>(false);
   const [newTaskModalOpen, setNewTaskModalOpen] = useState<boolean>(false);
+  const [signoutModalOpen, setSignoutModalOpen] = useState<boolean>(false);
+  const [signedOutUserDetails, setSignedOutUserDetails] = useState<{ name: string; title: string }>({
+    name: 'Eleanor Vance',
+    title: 'Operations Director',
+  });
 
   // Toast notification
   const [toastMessage, setToastMessage] = useState<{ text: string; type: 'success' | 'info' | 'warn' } | null>(null);
@@ -208,9 +214,13 @@ export default function App() {
   };
 
   const handleLogout = () => {
+    const name = currentUser?.name || 'Operator';
+    const title = currentUser?.title || (currentUser?.role === 'admin' ? 'Operations Director' : 'Henderson Crest Farm');
+    setSignedOutUserDetails({ name, title });
     setCurrentUser(null);
     setViewMode('landing');
-    showToast('Signed out of AgriVision console.', 'info');
+    setSignoutModalOpen(true);
+    showToast(`Successfully signed out. Have a productive day, ${name}!`, 'success');
   };
 
   // Toggle plot valve directly
@@ -303,6 +313,7 @@ export default function App() {
           onQuickDemoLogin={handleQuickDemoLogin}
           currentUser={currentUser}
           onGoToDashboard={() => setViewMode('dashboard')}
+          onLogout={handleLogout}
         />
       ) : (
         /* Authenticated Dual-Tier Agriculture Management Dashboard */
@@ -512,6 +523,18 @@ export default function App() {
         onClose={() => setNewTaskModalOpen(false)}
         plots={plots}
         onAddTask={handleAddTask}
+      />
+
+      {/* Signout Success Notification Popup */}
+      <SignoutSuccessModal
+        isOpen={signoutModalOpen}
+        onClose={() => setSignoutModalOpen(false)}
+        onSignInAgain={() => {
+          setSignoutModalOpen(false);
+          handleOpenAuthModal('login');
+        }}
+        userName={signedOutUserDetails.name}
+        userTitle={signedOutUserDetails.title}
       />
     </div>
   );

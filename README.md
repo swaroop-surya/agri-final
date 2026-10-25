@@ -105,6 +105,7 @@ Built for farm operators and agronomic field managers:
   - Automatically provisions new farm accounts with name, farm name, region district, and crop selection.
   - Dynamically registers newly created farms directly into the live admin registry and opens the farmer dashboard.
 - **Workstation Profile Menu**: Shows active profile initials, quick perspective switching between Admin and Farmer views, and instant sign-out.
+- **Signout Success Popup Modal (`SignoutSuccessModal.tsx`)**: Confirmation dialog confirming disconnected status, session termination notice, quick "Sign In Again" action, and auto-close countdown.
 
 ---
 
@@ -133,7 +134,8 @@ Built for farm operators and agronomic field managers:
 │   │       ├── ExportReportModal.tsx   # CSV and PDF report exporter
 │   │       ├── FarmerDetailModal.tsx   # Farmer profile & advisory dispatcher
 │   │       ├── IrrigationModal.tsx     # Solenoid valve run & cutoff scheduler
-│   │       └── NewTaskModal.tsx        # Agronomic field task creation
+│   │       ├── NewTaskModal.tsx        # Agronomic field task creation
+│   │       └── SignoutSuccessModal.tsx # Session termination & signout confirmation popup
 │   ├── data/
 │   │   └── mockAgricultureData.ts      # Telemetry feeds, plots, farmers & alerts
 │   ├── types/

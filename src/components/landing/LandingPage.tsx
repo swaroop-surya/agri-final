@@ -21,6 +21,7 @@ import {
   X,
   LogIn,
   UserPlus,
+  LogOut,
 } from 'lucide-react';
 import { AuthUser, UserRole } from '../../types/agriculture';
 
@@ -29,6 +30,7 @@ interface LandingPageProps {
   onQuickDemoLogin: (role: UserRole) => void;
   currentUser: AuthUser | null;
   onGoToDashboard: () => void;
+  onLogout?: () => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({
@@ -36,6 +38,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onQuickDemoLogin,
   currentUser,
   onGoToDashboard,
+  onLogout,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFeatureTab, setActiveFeatureTab] = useState<'telemetry' | 'irrigation' | 'diagnostics' | 'yield'>('telemetry');
@@ -99,15 +102,27 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             {/* Desktop Auth Buttons */}
-            <div className="hidden sm:flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-2.5">
               {currentUser ? (
-                <button
-                  onClick={onGoToDashboard}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#216847] hover:bg-[#18573A] text-white rounded-lg text-xs font-bold transition-all shadow-sm cursor-pointer"
-                >
-                  <span>Go to Dashboard</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={onGoToDashboard}
+                    className="flex items-center gap-2 px-4 py-2 bg-[#216847] hover:bg-[#18573A] text-white rounded-lg text-xs font-bold transition-all shadow-sm cursor-pointer"
+                  >
+                    <span>Go to Dashboard</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                  {onLogout && (
+                    <button
+                      onClick={onLogout}
+                      className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-[#DDEDE1] hover:text-white hover:bg-[#0C3021] rounded-lg transition-colors cursor-pointer border border-[#216847]/50"
+                      title="Sign Out of console"
+                    >
+                      <LogOut className="w-3.5 h-3.5" />
+                      <span>Sign Out</span>
+                    </button>
+                  )}
+                </div>
               ) : (
                 <>
                   <button
@@ -172,12 +187,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
             <div className="pt-3 border-t border-[#216847]/40 flex flex-col gap-2">
               {currentUser ? (
-                <button
-                  onClick={onGoToDashboard}
-                  className="w-full py-2 bg-[#216847] text-white rounded text-xs font-bold text-center"
-                >
-                  Enter Dashboard ({currentUser.name})
-                </button>
+                <div className="flex flex-col gap-2">
+                  <button
+                    onClick={onGoToDashboard}
+                    className="w-full py-2 bg-[#216847] text-white rounded text-xs font-bold text-center"
+                  >
+                    Enter Dashboard ({currentUser.name})
+                  </button>
+                  {onLogout && (
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        onLogout();
+                      }}
+                      className="w-full py-2 bg-[#0C3021] text-[#DDEDE1] hover:text-white rounded text-xs font-semibold text-center border border-[#216847]/40 flex items-center justify-center gap-1.5"
+                    >
+                      <LogOut className="w-3.5 h-3.5 text-[#DDEDE1]" />
+                      <span>Sign Out</span>
+                    </button>
+                  )}
+                </div>
               ) : (
                 <>
                   <button
