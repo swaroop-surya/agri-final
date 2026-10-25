@@ -1,0 +1,6 @@
+{
+  "name": "AgriVision - Smart Agriculture Management System",
+  "description": "Enterprise smart agriculture management platform featuring dual administrator and farmer precision dashboards, real-time IoT soil telemetry, automated irrigation control, regional crop analytics, and field diagnostic tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
