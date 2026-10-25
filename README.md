@@ -198,4 +198,4 @@ Built for farm operators and agronomic field managers:
 ---
 
 ## 📄 License
-Licensed under the Apache License, Version 2.0.
+Licensed under the sanju
