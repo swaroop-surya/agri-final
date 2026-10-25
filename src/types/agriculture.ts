@@ -1,5 +1,17 @@
 export type UserRole = 'admin' | 'farmer';
 
+export interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  title: string;
+  farmName?: string;
+  region?: string;
+  primaryCrop?: string;
+  avatarInitials: string;
+}
+
 export type CropType = 'Corn / Maize' | 'Soybeans' | 'Winter Wheat' | 'Cotton' | 'Alfalfa' | 'Tomatoes' | 'Barley';
 
 export type AlertSeverity = 'critical' | 'warning' | 'info' | 'optimal';

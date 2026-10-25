@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { UserRole, Farmer, Plot, AgroAlert, FieldTask } from './types/agriculture';
+import { UserRole, Farmer, Plot, AgroAlert, FieldTask, AuthUser } from './types/agriculture';
 import {
   INITIAL_PLOTS,
   INITIAL_FARMERS,
@@ -19,6 +19,7 @@ import { IrrigationModal } from './components/modals/IrrigationModal';
 import { FarmerDetailModal } from './components/modals/FarmerDetailModal';
 import { ExportReportModal } from './components/modals/ExportReportModal';
 import { NewTaskModal } from './components/modals/NewTaskModal';
+import { AuthModal } from './components/auth/AuthModal';
 import {
   CheckCircle2,
   AlertCircle,
@@ -38,6 +39,19 @@ export default function App() {
   const [farmers, setFarmers] = useState<Farmer[]>(INITIAL_FARMERS);
   const [alerts, setAlerts] = useState<AgroAlert[]>(INITIAL_ALERTS);
   const [tasks, setTasks] = useState<FieldTask[]>(INITIAL_TASKS);
+
+  // Authentication State
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>({
+    id: 'user-admin',
+    name: 'Eleanor Vance',
+    email: 'e.vance@agrivision.gov',
+    role: 'admin',
+    title: 'Operations Director',
+    region: 'District 4 - West Valley',
+    avatarInitials: 'EV',
+  });
+  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('login');
 
   // Search and Season Filter
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -67,6 +81,39 @@ export default function App() {
   const handleRoleChange = (newRole: UserRole) => {
     setRole(newRole);
     setMobileMenuOpen(false);
+
+    // If using standard default accounts, sync profile avatar/info
+    if (currentUser?.id === 'user-admin' || currentUser?.id === 'user-farmer') {
+      if (newRole === 'admin') {
+        setCurrentUser({
+          id: 'user-admin',
+          name: 'Eleanor Vance',
+          email: 'e.vance@agrivision.gov',
+          role: 'admin',
+          title: 'Operations Director',
+          region: 'District 4 - West Valley',
+          avatarInitials: 'EV',
+        });
+      } else {
+        setCurrentUser({
+          id: 'user-farmer',
+          name: 'Marcus Henderson',
+          email: 'm.henderson@crestfarms.org',
+          role: 'farmer',
+          title: 'Henderson Crest Farm',
+          farmName: 'Henderson Crest Farm',
+          region: 'District 4 - West Valley',
+          primaryCrop: 'Corn / Maize',
+          avatarInitials: 'MH',
+        });
+      }
+    } else if (currentUser) {
+      setCurrentUser({
+        ...currentUser,
+        role: newRole,
+      });
+    }
+
     if (newRole === 'admin') {
       setActiveTab('overview');
       showToast('Switched to Regional Administrator Command View', 'info');
@@ -74,6 +121,52 @@ export default function App() {
       setActiveTab('field-overview');
       showToast('Switched to Precision Farmer Operator View', 'info');
     }
+  };
+
+  // Auth Handlers
+  const handleOpenAuthModal = (mode: 'login' | 'register') => {
+    setAuthModalMode(mode);
+    setAuthModalOpen(true);
+  };
+
+  const handleLoginSuccess = (user: AuthUser) => {
+    setCurrentUser(user);
+    setRole(user.role);
+    if (user.role === 'admin') {
+      setActiveTab('overview');
+    } else {
+      setActiveTab('field-overview');
+    }
+
+    // If user registered a new farm, append to the farmer registry so it appears in the table!
+    if (user.role === 'farmer' && user.farmName) {
+      const existingFarmer = farmers.find((f) => f.email === user.email);
+      if (!existingFarmer) {
+        const newFarmerRecord: Farmer = {
+          id: `farm-${Date.now()}`,
+          name: user.name,
+          farmName: user.farmName,
+          region: user.region || 'District 4 - West Valley',
+          contact: '+1 (555) 800-4321',
+          email: user.email,
+          totalAcres: 320,
+          primaryCrop: (user.primaryCrop as any) || 'Corn / Maize',
+          status: 'Optimal',
+          activePlotsCount: 3,
+          sensorUptime: 99.5,
+          soilHealthIndex: 91,
+          lastSync: 'Just now',
+        };
+        setFarmers((prev) => [newFarmerRecord, ...prev]);
+      }
+    }
+
+    showToast(`Welcome, ${user.name}! Authenticated as ${user.role === 'admin' ? 'Administrator' : 'Farmer'}.`, 'success');
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    showToast('Signed out of AgriVision workstation.', 'info');
   };
 
   // Toggle plot valve directly
@@ -172,6 +265,9 @@ export default function App() {
         onSeasonChange={setSelectedSeason}
         onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
         mobileMenuOpen={mobileMenuOpen}
+        currentUser={currentUser}
+        onOpenAuthModal={handleOpenAuthModal}
+        onLogout={handleLogout}
       />
 
       {/* Main App Layout */}
@@ -320,7 +416,15 @@ export default function App() {
         </div>
       )}
 
-      {/* Modals */}
+      {/* Authentication Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onLoginSuccess={handleLoginSuccess}
+        initialMode={authModalMode}
+      />
+
+      {/* Other Modals */}
       <IrrigationModal
         isOpen={irrigationModalOpen}
         onClose={() => setIrrigationModalOpen(false)}
