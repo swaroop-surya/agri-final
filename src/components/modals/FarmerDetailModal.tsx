@@ -44,11 +44,11 @@ export const FarmerDetailModal: React.FC<FarmerDetailModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-      <div className="bg-white rounded-lg border border-[#cbd5c5] shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+      <div className="bg-[#FFFFFF] rounded-lg border border-[#E3E9E3] shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
         {/* Modal Header */}
-        <div className="bg-[#143823] text-white px-6 py-4 flex items-center justify-between shrink-0">
+        <div className="bg-[#123D2B] text-white px-6 py-4 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#2d6a4f] border border-[#52b788] flex items-center justify-center text-sm font-bold text-white shadow-xs">
+            <div className="w-10 h-10 rounded-full bg-[#216847] border border-[#DDEDE1]/30 flex items-center justify-center text-sm font-bold text-white shadow-xs">
               {farmer.name.split(' ').map((n) => n[0]).join('')}
             </div>
             <div>
@@ -57,64 +57,64 @@ export const FarmerDetailModal: React.FC<FarmerDetailModalProps> = ({
                 <span
                   className={`text-[10px] px-2 py-0.5 rounded font-semibold uppercase ${
                     farmer.status === 'Optimal'
-                      ? 'bg-emerald-800 text-emerald-200 border border-emerald-600'
+                      ? 'bg-[#E4F4E8] text-[#216847] border border-[#216847]/30'
                       : farmer.status === 'Irrigating'
-                      ? 'bg-blue-900 text-blue-200 border border-blue-700'
-                      : 'bg-amber-800 text-amber-200 border border-amber-600'
+                      ? 'bg-[#E7F0FC] text-[#285EA8] border border-[#285EA8]/30'
+                      : 'bg-[#FFF3D8] text-[#8A5A00] border border-[#D5A441]/40'
                   }`}
                 >
                   {farmer.status}
                 </span>
               </div>
-              <p className="text-xs text-[#a7c5b2]">{farmer.farmName} • {farmer.region}</p>
+              <p className="text-xs text-[#DDEDE1]/80">{farmer.farmName} • {farmer.region}</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-[#a7c5b2] hover:text-white hover:bg-[#1b4332]"
+            className="p-1 rounded-md text-[#DDEDE1]/70 hover:text-white hover:bg-[#0C3021]"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="p-6 space-y-6 overflow-y-auto text-xs text-[#2b3a2f]">
+        <div className="p-6 space-y-6 overflow-y-auto text-xs text-[#26372E]">
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="bg-[#f6f7f4] border border-[#e1e6dc] p-3 rounded-md">
-              <span className="text-[10px] font-semibold uppercase text-[#5f7464] block">Total Land</span>
-              <span className="text-lg font-bold text-[#143823]">{farmer.totalAcres} Acres</span>
+            <div className="bg-[#F7F8F3] border border-[#E3E9E3] p-3 rounded-md">
+              <span className="text-[10px] font-semibold uppercase text-[#64746A] block">Total Land</span>
+              <span className="text-lg font-bold text-[#123D2B]">{farmer.totalAcres} Acres</span>
             </div>
-            <div className="bg-[#f6f7f4] border border-[#e1e6dc] p-3 rounded-md">
-              <span className="text-[10px] font-semibold uppercase text-[#5f7464] block">Primary Crop</span>
-              <span className="text-lg font-bold text-[#143823]">{farmer.primaryCrop}</span>
+            <div className="bg-[#F7F8F3] border border-[#E3E9E3] p-3 rounded-md">
+              <span className="text-[10px] font-semibold uppercase text-[#64746A] block">Primary Crop</span>
+              <span className="text-lg font-bold text-[#123D2B]">{farmer.primaryCrop}</span>
             </div>
-            <div className="bg-[#f6f7f4] border border-[#e1e6dc] p-3 rounded-md">
-              <span className="text-[10px] font-semibold uppercase text-[#5f7464] block">IoT Uptime</span>
-              <span className="text-lg font-bold text-[#2d6a4f]">{farmer.sensorUptime}%</span>
+            <div className="bg-[#F7F8F3] border border-[#E3E9E3] p-3 rounded-md">
+              <span className="text-[10px] font-semibold uppercase text-[#64746A] block">IoT Uptime</span>
+              <span className="text-lg font-bold text-[#216847]">{farmer.sensorUptime}%</span>
             </div>
-            <div className="bg-[#f6f7f4] border border-[#e1e6dc] p-3 rounded-md">
-              <span className="text-[10px] font-semibold uppercase text-[#5f7464] block">Soil Health Index</span>
-              <span className="text-lg font-bold text-[#143823]">{farmer.soilHealthIndex} / 100</span>
+            <div className="bg-[#F7F8F3] border border-[#E3E9E3] p-3 rounded-md">
+              <span className="text-[10px] font-semibold uppercase text-[#64746A] block">Soil Health Index</span>
+              <span className="text-lg font-bold text-[#123D2B]">{farmer.soilHealthIndex} / 100</span>
             </div>
           </div>
 
           {/* Contact & Gateway Coordinates */}
-          <div className="bg-[#fbfbfa] p-4 rounded-md border border-[#e2e6dd] space-y-2">
-            <h4 className="text-xs font-bold text-[#143823] uppercase tracking-wider mb-2">
+          <div className="bg-[#EFF6F0] p-4 rounded-md border border-[#DDEDE1] space-y-2">
+            <h4 className="text-xs font-bold text-[#123D2B] uppercase tracking-wider mb-2">
               Operator & Farm Telemetry Contact
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-              <div className="flex items-center gap-2 text-gray-700">
-                <Phone className="w-4 h-4 text-[#2d6a4f]" />
+              <div className="flex items-center gap-2 text-[#26372E]">
+                <Phone className="w-4 h-4 text-[#216847]" />
                 <span>{farmer.contact}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-700">
-                <Mail className="w-4 h-4 text-[#2d6a4f]" />
+              <div className="flex items-center gap-2 text-[#26372E]">
+                <Mail className="w-4 h-4 text-[#216847]" />
                 <span className="truncate">{farmer.email}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-700">
-                <Radio className="w-4 h-4 text-[#2d6a4f]" />
+              <div className="flex items-center gap-2 text-[#26372E]">
+                <Radio className="w-4 h-4 text-[#216847]" />
                 <span>Sync: {farmer.lastSync}</span>
               </div>
             </div>
@@ -122,12 +122,12 @@ export const FarmerDetailModal: React.FC<FarmerDetailModalProps> = ({
 
           {/* Managed Plots Snapshot */}
           <div>
-            <h4 className="text-xs font-bold text-[#143823] uppercase tracking-wider mb-2">
+            <h4 className="text-xs font-bold text-[#123D2B] uppercase tracking-wider mb-2">
               Active Monitored Plots ({plots.length})
             </h4>
-            <div className="border border-[#e1e6dc] rounded-md overflow-hidden">
+            <div className="border border-[#E3E9E3] rounded-md overflow-hidden">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#f4f6f1] text-[#5f7464] text-[11px] font-semibold border-b border-[#e1e6dc]">
+                <thead className="bg-[#EFF6F0] text-[#64746A] text-[11px] font-semibold border-b border-[#E3E9E3]">
                   <tr>
                     <th className="py-2 px-3">Plot Name</th>
                     <th className="py-2 px-3">Crop / Variety</th>
@@ -136,18 +136,18 @@ export const FarmerDetailModal: React.FC<FarmerDetailModalProps> = ({
                     <th className="py-2 px-3 text-center">Valve Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f0f2eb]">
+                <tbody className="divide-y divide-[#E3E9E3]">
                   {plots.map((p) => (
-                    <tr key={p.id} className="hover:bg-[#fafbf9]">
-                      <td className="py-2.5 px-3 font-semibold text-[#143823]">{p.name}</td>
-                      <td className="py-2.5 px-3 text-gray-600">{p.crop}</td>
+                    <tr key={p.id} className="hover:bg-[#F7F8F3]">
+                      <td className="py-2.5 px-3 font-semibold text-[#123D2B]">{p.name}</td>
+                      <td className="py-2.5 px-3 text-[#64746A]">{p.crop}</td>
                       <td className="py-2.5 px-3 text-right font-medium">{p.acres}</td>
                       <td className="py-2.5 px-3 text-center">
                         <span
                           className={`inline-block font-semibold px-2 py-0.5 rounded text-[11px] ${
                             p.telemetry.moistureRoot < p.telemetry.optimalMoistureMin
-                              ? 'bg-amber-100 text-amber-800'
-                              : 'bg-emerald-100 text-emerald-800'
+                              ? 'bg-[#FFF3D8] text-[#8A5A00]'
+                              : 'bg-[#E4F4E8] text-[#216847]'
                           }`}
                         >
                           {p.telemetry.moistureRoot}%
@@ -157,8 +157,8 @@ export const FarmerDetailModal: React.FC<FarmerDetailModalProps> = ({
                         <span
                           className={`inline-block font-semibold px-2 py-0.5 rounded text-[10px] ${
                             p.valveOpen
-                              ? 'bg-blue-100 text-blue-800 animate-pulse'
-                              : 'bg-gray-100 text-gray-700'
+                              ? 'bg-[#E7F0FC] text-[#285EA8] animate-pulse font-bold'
+                              : 'bg-[#EDF1ED] text-[#64746A]'
                           }`}
                         >
                           {p.valveOpen ? 'Irrigating' : 'Standby'}
@@ -172,11 +172,11 @@ export const FarmerDetailModal: React.FC<FarmerDetailModalProps> = ({
           </div>
 
           {/* Send Agronomic Advisory */}
-          <div className="bg-[#f4f6f1] p-4 rounded-md border border-[#e2e6dd]">
-            <h4 className="text-xs font-bold text-[#143823] uppercase tracking-wider mb-1">
+          <div className="bg-[#EFF6F0] p-4 rounded-md border border-[#DDEDE1]">
+            <h4 className="text-xs font-bold text-[#123D2B] uppercase tracking-wider mb-1">
               Dispatch Agronomic Advisory
             </h4>
-            <p className="text-[11px] text-gray-600 mb-2">
+            <p className="text-[11px] text-[#64746A] mb-2">
               Send an instant operational directive or soil amendment recommendation directly to this farmer’s mobile app.
             </p>
             <form onSubmit={handleSendAdvisory} className="space-y-2">
@@ -185,20 +185,20 @@ export const FarmerDetailModal: React.FC<FarmerDetailModalProps> = ({
                 onChange={(e) => setAdvisoryMessage(e.target.value)}
                 placeholder="e.g., Regional radar indicates heavy precipitation tonight; delay scheduled fertilizer broadcast until Wednesday."
                 rows={2}
-                className="w-full p-2.5 bg-white border border-[#d1d8cc] rounded-md text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+                className="w-full p-2.5 bg-[#FFFFFF] border border-[#E3E9E3] rounded-md text-xs text-[#26372E] placeholder-[#64746A]/60 focus:outline-none focus:ring-1 focus:ring-[#216847]"
               />
               <div className="flex items-center justify-between">
                 {advisorySent ? (
-                  <span className="text-xs font-medium text-emerald-700 flex items-center gap-1.5">
+                  <span className="text-xs font-medium text-[#216847] flex items-center gap-1.5">
                     <CheckCircle2 className="w-4 h-4" /> Advisory dispatched to {farmer.name} via SMS & Portal!
                   </span>
                 ) : (
-                  <span className="text-[11px] text-gray-500">Logged to official regional agricultural record.</span>
+                  <span className="text-[11px] text-[#64746A]">Logged to official regional agricultural record.</span>
                 )}
                 <button
                   type="submit"
                   disabled={!advisoryMessage.trim()}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#143823] hover:bg-[#1b4332] disabled:opacity-50 text-white rounded-md text-xs font-semibold transition-colors"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#216847] hover:bg-[#18573A] disabled:opacity-50 text-white rounded-md text-xs font-semibold transition-colors shadow-xs"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Transmit Advisory</span>
@@ -209,11 +209,11 @@ export const FarmerDetailModal: React.FC<FarmerDetailModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3 bg-[#f6f7f4] border-t border-[#e1e6dc] flex justify-end shrink-0">
+        <div className="px-6 py-3 bg-[#F7F8F3] border-t border-[#E3E9E3] flex justify-end shrink-0">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-1.5 rounded-md text-xs font-semibold text-[#143823] bg-white border border-[#d1d8cc] hover:bg-[#f0f2eb]"
+            className="px-4 py-1.5 rounded-md text-xs font-semibold text-[#123D2B] bg-[#FFFFFF] border border-[#E3E9E3] hover:bg-[#EFF6F0]"
           >
             Close Overview
           </button>

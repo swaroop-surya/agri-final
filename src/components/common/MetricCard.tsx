@@ -20,13 +20,13 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   subValue,
   trend,
   icon,
-  iconBgColor = 'bg-[#143823]/10 text-[#143823]',
+  iconBgColor = 'bg-[#EFF6F0] text-[#216847]',
   badge,
 }) => {
   return (
-    <div className="bg-white border border-[#e1e6dc] rounded-lg p-4 shadow-xs hover:border-[#cbd5c5] transition-colors">
+    <div className="bg-white border border-[#E3E9E3] rounded-lg p-4 shadow-xs hover:border-[#CBD5CD] transition-colors">
       <div className="flex items-start justify-between">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#5f7464]">
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#64746A]">
           {label}
         </span>
         <div className={`p-2 rounded-md ${iconBgColor}`}>
@@ -35,26 +35,26 @@ export const MetricCard: React.FC<MetricCardProps> = ({
       </div>
 
       <div className="mt-2 flex items-baseline gap-2">
-        <span className="text-2xl font-bold tracking-tight text-[#143823]">
+        <span className="text-2xl font-bold tracking-tight text-[#123D2B]">
           {value}
         </span>
         {badge && (
-          <span className="text-xs font-medium px-2 py-0.5 rounded-sm bg-[#e8f5e9] text-[#1b4332] border border-[#c8e6c9]">
+          <span className="text-xs font-semibold px-2 py-0.5 rounded-sm bg-[#E4F4E8] text-[#216847] border border-[#DDEDE1]">
             {badge}
           </span>
         )}
       </div>
 
-      <div className="mt-2 flex items-center justify-between text-xs text-[#526054]">
+      <div className="mt-2 flex items-center justify-between text-xs text-[#64746A]">
         {subValue && <span>{subValue}</span>}
         {trend && (
           <span
-            className={`inline-flex items-center gap-0.5 font-medium ${
+            className={`inline-flex items-center gap-0.5 font-semibold ${
               trend.neutral
-                ? 'text-gray-500'
+                ? 'text-[#64746A]'
                 : trend.isPositive
-                ? 'text-[#2d6a4f]'
-                : 'text-amber-700'
+                ? 'text-[#216847]'
+                : 'text-[#8A5A00]'
             }`}
           >
             {trend.value}

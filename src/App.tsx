@@ -295,7 +295,7 @@ export default function App() {
   const unacknowledgedAlertsCount = alerts.filter((a) => !a.acknowledged).length;
 
   return (
-    <div className="min-h-screen bg-[#f6f7f4] text-[#1c2e22] flex flex-col antialiased">
+    <div className="min-h-screen bg-[#F7F8F3] text-[#26372E] flex flex-col antialiased">
       {viewMode === 'landing' ? (
         /* Public Landing Page with Home, About, Features, Services, Login, Get Started */
         <LandingPage
@@ -376,13 +376,13 @@ export default function App() {
           </div>
 
           {/* Mobile Bottom Quick-Navigation Bar */}
-          <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#e1e6dc] px-3 py-1.5 flex items-center justify-around shadow-lg">
+          <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E3E9E3] px-3 py-1.5 flex items-center justify-around shadow-lg">
             {role === 'admin' ? (
               <>
                 <button
                   onClick={() => setActiveTab('overview')}
                   className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                    activeTab === 'overview' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                    activeTab === 'overview' ? 'text-[#216847] font-bold' : 'text-[#64746A]'
                   }`}
                 >
                   <LayoutDashboard className="w-4 h-4 mb-0.5" />
@@ -391,7 +391,7 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab('farmers')}
                   className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                    activeTab === 'farmers' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                    activeTab === 'farmers' ? 'text-[#216847] font-bold' : 'text-[#64746A]'
                   }`}
                 >
                   <Users className="w-4 h-4 mb-0.5" />
@@ -400,7 +400,7 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab('irrigation')}
                   className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                    activeTab === 'irrigation' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                    activeTab === 'irrigation' ? 'text-[#216847] font-bold' : 'text-[#64746A]'
                   }`}
                 >
                   <Droplets className="w-4 h-4 mb-0.5" />
@@ -409,7 +409,7 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab('alerts')}
                   className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                    activeTab === 'alerts' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                    activeTab === 'alerts' ? 'text-[#216847] font-bold' : 'text-[#64746A]'
                   }`}
                 >
                   <AlertTriangle className="w-4 h-4 mb-0.5" />
@@ -421,7 +421,7 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab('field-overview')}
                   className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                    activeTab === 'field-overview' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                    activeTab === 'field-overview' ? 'text-[#216847] font-bold' : 'text-[#64746A]'
                   }`}
                 >
                   <LayoutDashboard className="w-4 h-4 mb-0.5" />
@@ -430,7 +430,7 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab('telemetry')}
                   className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                    activeTab === 'telemetry' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                    activeTab === 'telemetry' ? 'text-[#216847] font-bold' : 'text-[#64746A]'
                   }`}
                 >
                   <Layers className="w-4 h-4 mb-0.5" />
@@ -439,7 +439,7 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab('irrigation')}
                   className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                    activeTab === 'irrigation' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                    activeTab === 'irrigation' ? 'text-[#216847] font-bold' : 'text-[#64746A]'
                   }`}
                 >
                   <Droplets className="w-4 h-4 mb-0.5" />
@@ -448,7 +448,7 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab('weather')}
                   className={`flex flex-col items-center py-1 px-2 text-[10px] font-medium rounded transition-colors ${
-                    activeTab === 'weather' ? 'text-[#143823] font-bold' : 'text-[#798e7e]'
+                    activeTab === 'weather' ? 'text-[#216847] font-bold' : 'text-[#64746A]'
                   }`}
                 >
                   <CloudSun className="w-4 h-4 mb-0.5" />
@@ -462,13 +462,13 @@ export default function App() {
 
       {/* Floating Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-18 lg:bottom-5 right-4 sm:right-5 z-50 flex items-center gap-2.5 bg-[#143823] text-white px-3.5 py-2.5 rounded-lg shadow-xl border border-[#2d6a4f] text-xs animate-in slide-in-from-bottom duration-200 max-w-[90vw]">
+        <div className="fixed bottom-18 lg:bottom-5 right-4 sm:right-5 z-50 flex items-center gap-2.5 bg-[#123D2B] text-white px-3.5 py-2.5 rounded-lg shadow-xl border border-[#216847] text-xs animate-in slide-in-from-bottom duration-200 max-w-[90vw]">
           {toastMessage.type === 'success' ? (
-            <CheckCircle2 className="w-4 h-4 text-[#52b788] shrink-0" />
+            <CheckCircle2 className="w-4 h-4 text-[#DDEDE1] shrink-0" />
           ) : toastMessage.type === 'warn' ? (
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+            <AlertCircle className="w-4 h-4 text-[#D5A441] shrink-0" />
           ) : (
-            <Info className="w-4 h-4 text-[#74c69d] shrink-0" />
+            <Info className="w-4 h-4 text-[#DDEDE1] shrink-0" />
           )}
           <span className="font-medium truncate">{toastMessage.text}</span>
         </div>

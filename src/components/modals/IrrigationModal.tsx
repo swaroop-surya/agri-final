@@ -33,37 +33,37 @@ export const IrrigationModal: React.FC<IrrigationModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-      <div className="bg-white rounded-lg border border-[#cbd5c5] shadow-2xl max-w-lg w-full overflow-hidden">
+      <div className="bg-[#FFFFFF] rounded-lg border border-[#E3E9E3] shadow-2xl max-w-lg w-full overflow-hidden">
         {/* Header */}
-        <div className="bg-[#143823] text-white px-5 py-4 flex items-center justify-between">
+        <div className="bg-[#123D2B] text-white px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded bg-[#2d6a4f]">
-              <Droplets className="w-5 h-5 text-[#d8f3dc]" />
+            <div className="p-2 rounded bg-[#216847]">
+              <Droplets className="w-5 h-5 text-[#DDEDE1]" />
             </div>
             <div>
               <h3 className="text-base font-semibold">Initiate Precision Irrigation Cycle</h3>
-              <p className="text-xs text-[#a7c5b2]">Automated Solenoid Valve Control System</p>
+              <p className="text-xs text-[#DDEDE1]/80">Automated Solenoid Valve Control System</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-[#a7c5b2] hover:text-white hover:bg-[#1b4332]"
+            className="p-1 rounded-md text-[#DDEDE1]/70 hover:text-white hover:bg-[#0C3021]"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-5 space-y-4 text-xs text-[#2b3a2f]">
+        <div className="p-5 space-y-4 text-xs text-[#26372E]">
           {/* Plot Selection */}
           <div>
-            <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+            <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
               Select Field / Plot
             </label>
             <select
               value={selectedPlotId}
               onChange={(e) => setSelectedPlotId(e.target.value)}
-              className="w-full px-3 py-2 bg-[#f8f9f6] border border-[#d1d8cc] rounded-md text-xs font-medium text-[#143823] focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+              className="w-full px-3 py-2 bg-[#F7F8F3] border border-[#E3E9E3] rounded-md text-xs font-medium text-[#26372E] focus:outline-none focus:ring-1 focus:ring-[#216847]"
             >
               {plots.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -75,16 +75,16 @@ export const IrrigationModal: React.FC<IrrigationModalProps> = ({
 
           {/* Current telemetry check */}
           {currentPlot && (
-            <div className="bg-[#f0f4ee] p-3 rounded-md border border-[#d8e0d4] flex items-center justify-between">
+            <div className="bg-[#EFF6F0] p-3 rounded-md border border-[#DDEDE1] flex items-center justify-between">
               <div>
-                <div className="text-[10px] uppercase font-semibold text-[#5f7464]">Current Soil Moisture</div>
-                <div className="text-sm font-bold text-[#143823]">
+                <div className="text-[10px] uppercase font-semibold text-[#64746A]">Current Soil Moisture</div>
+                <div className="text-sm font-bold text-[#123D2B]">
                   {currentPlot.telemetry.moistureRoot}% Root Zone
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-[10px] uppercase font-semibold text-[#5f7464]">Optimal Range</div>
-                <div className="text-xs font-medium text-[#2d6a4f]">
+                <div className="text-[10px] uppercase font-semibold text-[#64746A]">Optimal Range</div>
+                <div className="text-xs font-medium text-[#216847]">
                   {currentPlot.telemetry.optimalMoistureMin}% – {currentPlot.telemetry.optimalMoistureMax}%
                 </div>
               </div>
@@ -93,7 +93,7 @@ export const IrrigationModal: React.FC<IrrigationModalProps> = ({
 
           {/* Duration Selector */}
           <div>
-            <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+            <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
               Irrigation Run Duration
             </label>
             <div className="grid grid-cols-4 gap-2">
@@ -104,8 +104,8 @@ export const IrrigationModal: React.FC<IrrigationModalProps> = ({
                   onClick={() => setDuration(mins)}
                   className={`py-2 px-2 rounded border text-center font-semibold transition-all ${
                     duration === mins
-                      ? 'bg-[#143823] text-white border-[#143823] shadow-xs'
-                      : 'bg-[#fafbf9] text-[#2b3a2f] border-[#d8e0d4] hover:bg-[#f0f4ee]'
+                      ? 'bg-[#216847] text-white border-[#216847] shadow-xs'
+                      : 'bg-[#F7F8F3] text-[#26372E] border-[#E3E9E3] hover:bg-[#EFF6F0]'
                   }`}
                 >
                   <Clock className="w-3.5 h-3.5 mx-auto mb-1 opacity-80" />
@@ -118,10 +118,10 @@ export const IrrigationModal: React.FC<IrrigationModalProps> = ({
           {/* Target Moisture Cutoff */}
           <div>
             <div className="flex justify-between items-center mb-1">
-              <label className="font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider">
+              <label className="font-semibold uppercase text-[10px] text-[#64746A] tracking-wider">
                 Automated Cutoff Threshold
               </label>
-              <span className="font-bold text-[#2d6a4f]">{targetMoisture}% Moisture</span>
+              <span className="font-bold text-[#216847]">{targetMoisture}% Moisture</span>
             </div>
             <input
               type="range"
@@ -130,22 +130,22 @@ export const IrrigationModal: React.FC<IrrigationModalProps> = ({
               step="1"
               value={targetMoisture}
               onChange={(e) => setTargetMoisture(Number(e.target.value))}
-              className="w-full accent-[#2d6a4f] cursor-pointer"
+              className="w-full accent-[#216847] cursor-pointer"
             />
-            <p className="text-[10px] text-[#798e7e] mt-1">
+            <p className="text-[10px] text-[#64746A] mt-1">
               Smart sensors will automatically close the solenoid valve when root-zone moisture reaches {targetMoisture}%.
             </p>
           </div>
 
           {/* Flow rate configuration */}
           <div>
-            <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+            <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
               Pump Delivery Preset
             </label>
             <select
               value={flowPreset}
               onChange={(e) => setFlowPreset(e.target.value as any)}
-              className="w-full px-3 py-2 bg-[#f8f9f6] border border-[#d1d8cc] rounded-md text-xs font-medium text-[#143823] focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+              className="w-full px-3 py-2 bg-[#F7F8F3] border border-[#E3E9E3] rounded-md text-xs font-medium text-[#26372E] focus:outline-none focus:ring-1 focus:ring-[#216847]"
             >
               <option value="Standard Drip (280 L/min)">Standard Drip (280 L/min) - High Efficiency</option>
               <option value="High Volume Pivot (450 L/min)">High Volume Pivot (450 L/min) - Full Field Coverage</option>
@@ -153,8 +153,8 @@ export const IrrigationModal: React.FC<IrrigationModalProps> = ({
             </select>
           </div>
 
-          <div className="p-2.5 rounded bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-2 text-[11px]">
-            <AlertCircle className="w-4 h-4 shrink-0 text-amber-700 mt-0.5" />
+          <div className="p-2.5 rounded bg-[#FFF3D8] border border-[#D5A441]/40 text-[#8A5A00] flex items-start gap-2 text-[11px]">
+            <AlertCircle className="w-4 h-4 shrink-0 text-[#8A5A00] mt-0.5" />
             <span>
               Weather telemetry reports 10% precipitation chance. Auto-evapotranspiration compensation is active.
             </span>
@@ -162,18 +162,18 @@ export const IrrigationModal: React.FC<IrrigationModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3.5 bg-[#f6f7f4] border-t border-[#e1e6dc] flex items-center justify-end gap-2.5">
+        <div className="px-5 py-3.5 bg-[#F7F8F3] border-t border-[#E3E9E3] flex items-center justify-end gap-2.5">
           <button
             type="button"
             onClick={onClose}
-            className="px-3.5 py-1.5 rounded-md text-xs font-medium text-[#5f7464] hover:text-[#143823] hover:bg-[#e2e6dd]"
+            className="px-3.5 py-1.5 rounded-md text-xs font-medium text-[#64746A] hover:text-[#123D2B] hover:bg-[#EFF6F0]"
           >
             Cancel
           </button>
           <button
             type="button"
             onClick={handleStart}
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-[#2d6a4f] hover:bg-[#1b4332] text-white text-xs font-semibold shadow-xs transition-colors"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-[#216847] hover:bg-[#18573A] text-white text-xs font-semibold shadow-xs transition-colors"
           >
             <CheckCircle2 className="w-4 h-4" />
             <span>Start Irrigation ({duration} min)</span>

@@ -11,7 +11,6 @@ import {
   FileSpreadsheet,
   Menu,
   X,
-  User,
   LogIn,
 } from 'lucide-react';
 import { UserRole, AgroAlert, AuthUser } from '../../types/agriculture';
@@ -66,7 +65,7 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="sticky top-0 z-30 bg-[#143823] text-white border-b border-[#1b4332] shadow-sm">
+    <header className="sticky top-0 z-30 bg-[#123D2B] text-white border-b border-[#0C3021] shadow-sm">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-15 sm:h-16 gap-2 sm:gap-4">
           {/* Left: Mobile Menu Toggle + Brand Identity */}
@@ -75,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={onToggleMobileMenu}
-              className="lg:hidden p-1.5 rounded-md text-[#d8f3dc] hover:bg-[#1b4332] focus:outline-none cursor-pointer"
+              className="lg:hidden p-1.5 rounded-md text-[#DDEDE1] hover:bg-[#0C3021] focus:outline-none cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -87,20 +86,20 @@ export const Header: React.FC<HeaderProps> = ({
               className="flex items-center gap-2.5 text-left cursor-pointer group"
               title="Return to AgriVision Landing Page"
             >
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-[#2d6a4f] group-hover:bg-[#387a5a] flex items-center justify-center text-[#d8f3dc] shadow-inner border border-[#40916c] shrink-0 transition-colors">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-md bg-[#216847] group-hover:bg-[#18573A] flex items-center justify-center text-[#DDEDE1] shadow-inner border border-[#216847] shrink-0 transition-colors">
                 <Sprout className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
 
               <div>
                 <div className="flex items-center gap-1.5 sm:gap-2">
-                  <span className="font-bold text-sm sm:text-base tracking-tight text-white group-hover:text-[#a7f3d0] transition-colors">
+                  <span className="font-bold text-sm sm:text-base tracking-tight text-white group-hover:text-[#DDEDE1] transition-colors">
                     AgriVision
                   </span>
-                  <span className="hidden sm:inline-block text-[9px] uppercase font-semibold px-1.5 py-0.5 rounded bg-[#2d6a4f]/70 text-[#d8f3dc] border border-[#52b788]/40">
+                  <span className="hidden sm:inline-block text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-[#216847] text-[#DDEDE1] border border-[#DDEDE1]/30">
                     v4.2
                   </span>
                 </div>
-                <p className="text-[10px] text-[#a7c5b2] hidden md:block">Smart Agriculture System</p>
+                <p className="text-[10px] text-[#DDEDE1]/80 hidden md:block">Smart Agriculture System</p>
               </div>
             </button>
 
@@ -108,7 +107,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={onNavigateToLanding}
-                className="hidden xl:flex items-center gap-1 px-2 py-1 text-[11px] font-semibold text-[#a7c5b2] hover:text-white bg-[#0f2a1b] hover:bg-[#1b4332] rounded border border-[#2d6a4f]/50 transition-colors cursor-pointer"
+                className="hidden xl:flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-[#DDEDE1] hover:text-white bg-[#0C3021] hover:bg-[#18573A] rounded border border-[#216847]/50 transition-colors cursor-pointer"
                 title="Return to Landing Page"
               >
                 <span>← Home</span>
@@ -119,14 +118,14 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Center: Role Switcher & Season selector */}
           <div className="flex items-center gap-1.5 sm:gap-2">
             {/* Responsive Role Switcher */}
-            <div className="bg-[#0f2a1b] p-0.5 sm:p-1 rounded-lg border border-[#234d35] flex items-center shadow-inner">
+            <div className="bg-[#0C3021] p-0.5 sm:p-1 rounded-lg border border-[#216847]/50 flex items-center shadow-inner">
               <button
                 type="button"
                 onClick={() => onRoleChange('admin')}
                 className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
                   role === 'admin'
-                    ? 'bg-[#2d6a4f] text-white shadow-xs'
-                    : 'text-[#a7c5b2] hover:text-white'
+                    ? 'bg-[#216847] text-white shadow-xs'
+                    : 'text-[#DDEDE1] hover:text-white'
                 }`}
               >
                 <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
@@ -138,8 +137,8 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => onRoleChange('farmer')}
                 className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
                   role === 'farmer'
-                    ? 'bg-[#2d6a4f] text-white shadow-xs'
-                    : 'text-[#a7c5b2] hover:text-white'
+                    ? 'bg-[#216847] text-white shadow-xs'
+                    : 'text-[#DDEDE1] hover:text-white'
                 }`}
               >
                 <Tractor className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
@@ -151,16 +150,16 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="relative hidden lg:block">
               <button
                 onClick={() => setShowSeasonDropdown(!showSeasonDropdown)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#1b4332]/70 hover:bg-[#1b4332] text-xs text-[#d8f3dc] border border-[#2d6a4f]/50 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#18573A]/60 hover:bg-[#18573A] text-xs text-[#DDEDE1] border border-[#216847]/60 transition-colors cursor-pointer"
               >
-                <Calendar className="w-3.5 h-3.5 text-[#74c69d]" />
+                <Calendar className="w-3.5 h-3.5 text-[#DDEDE1]" />
                 <span className="max-w-[130px] truncate">{selectedSeason}</span>
-                <ChevronDown className="w-3 h-3 text-[#a7c5b2]" />
+                <ChevronDown className="w-3 h-3 text-[#DDEDE1]/70" />
               </button>
 
               {showSeasonDropdown && (
-                <div className="absolute left-0 mt-1 w-60 bg-white text-gray-800 rounded-md shadow-xl border border-[#e1e6dc] py-1 z-50">
-                  <div className="px-3 py-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                <div className="absolute left-0 mt-1 w-60 bg-white text-[#26372E] rounded-md shadow-xl border border-[#E3E9E3] py-1 z-50">
+                  <div className="px-3 py-1 text-[10px] font-bold text-[#64746A] uppercase tracking-wider">
                     Agronomic Cycle
                   </div>
                   {seasons.map((s) => (
@@ -170,12 +169,12 @@ export const Header: React.FC<HeaderProps> = ({
                         onSeasonChange(s);
                         setShowSeasonDropdown(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#f0f4ee] cursor-pointer ${
-                        selectedSeason === s ? 'font-semibold text-[#143823] bg-[#eaf4ec]' : 'text-gray-700'
+                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#EFF6F0] cursor-pointer ${
+                        selectedSeason === s ? 'font-semibold text-[#123D2B] bg-[#E4F4E8]' : 'text-[#26372E]'
                       }`}
                     >
                       <span>{s}</span>
-                      {selectedSeason === s && <Check className="w-3.5 h-3.5 text-[#2d6a4f]" />}
+                      {selectedSeason === s && <Check className="w-3.5 h-3.5 text-[#216847]" />}
                     </button>
                   ))}
                 </div>
@@ -185,18 +184,18 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Desktop Search */}
           <div className="hidden xl:flex items-center flex-1 max-w-xs relative">
-            <Search className="w-4 h-4 text-[#8ba394] absolute left-3 pointer-events-none" />
+            <Search className="w-4 h-4 text-[#DDEDE1]/60 absolute left-3 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search plots, farmers, alerts..."
-              className="w-full pl-9 pr-3 py-1.5 bg-[#0f2a1b]/90 border border-[#2d6a4f]/70 rounded-md text-xs text-white placeholder-[#8ba394] focus:outline-none focus:ring-1 focus:ring-[#74c69d] focus:border-[#74c69d]"
+              className="w-full pl-9 pr-3 py-1.5 bg-[#0C3021] border border-[#216847]/70 rounded-md text-xs text-white placeholder-[#DDEDE1]/60 focus:outline-none focus:ring-1 focus:ring-[#DDEDE1] focus:border-[#DDEDE1]"
             />
             {searchQuery && (
               <button
                 onClick={() => onSearchChange('')}
-                className="absolute right-2.5 text-xs text-[#8ba394] hover:text-white"
+                className="absolute right-2.5 text-xs text-[#DDEDE1]/70 hover:text-white"
               >
                 ×
               </button>
@@ -208,7 +207,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Mobile search toggle button */}
             <button
               onClick={() => setMobileSearchVisible(!mobileSearchVisible)}
-              className="xl:hidden p-1.5 rounded-md text-[#d8f3dc] hover:bg-[#1b4332] cursor-pointer"
+              className="xl:hidden p-1.5 rounded-md text-[#DDEDE1] hover:bg-[#0C3021] cursor-pointer"
               aria-label="Toggle search"
             >
               <Search className="w-4 h-4" />
@@ -218,9 +217,9 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenExportModal}
               title="Export Report"
-              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#2d6a4f] hover:bg-[#387a5a] text-white text-xs font-medium border border-[#40916c] transition-colors cursor-pointer"
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#216847] hover:bg-[#18573A] text-white text-xs font-semibold border border-[#216847] transition-colors cursor-pointer shadow-xs"
             >
-              <FileSpreadsheet className="w-3.5 h-3.5 text-[#d8f3dc]" />
+              <FileSpreadsheet className="w-3.5 h-3.5 text-[#DDEDE1]" />
               <span className="hidden lg:inline">Export Report</span>
             </button>
 
@@ -228,57 +227,59 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="relative">
               <button
                 onClick={() => setShowAlertsDropdown(!showAlertsDropdown)}
-                className="relative p-1.5 sm:p-2 rounded-md bg-[#1b4332] hover:bg-[#23533e] text-[#d8f3dc] transition-colors cursor-pointer"
+                className="relative p-1.5 sm:p-2 rounded-md bg-[#0C3021] hover:bg-[#18573A] text-[#DDEDE1] transition-colors cursor-pointer border border-[#216847]/40"
                 aria-label="Alerts"
               >
                 <Bell className="w-4 h-4" />
                 {unacknowledgedAlerts.length > 0 && (
-                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-500 text-[9px] font-bold text-white flex items-center justify-center shadow-xs">
+                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#D5A441] text-[9px] font-bold text-[#123D2B] flex items-center justify-center shadow-xs">
                     {unacknowledgedAlerts.length}
                   </span>
                 )}
               </button>
 
               {showAlertsDropdown && (
-                <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-88 max-w-sm bg-white rounded-lg shadow-xl border border-[#e1e6dc] text-gray-800 z-50 overflow-hidden">
-                  <div className="px-3.5 py-2.5 bg-[#f6f7f4] border-b border-[#e1e6dc] flex items-center justify-between">
+                <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-88 max-w-sm bg-white rounded-lg shadow-xl border border-[#E3E9E3] text-[#26372E] z-50 overflow-hidden">
+                  <div className="px-3.5 py-2.5 bg-[#F7F8F3] border-b border-[#E3E9E3] flex items-center justify-between">
                     <div>
-                      <h4 className="text-xs font-bold text-[#143823] uppercase tracking-wider">
+                      <h4 className="text-xs font-bold text-[#123D2B] uppercase tracking-wider">
                         Active Farm Alerts
                       </h4>
-                      <p className="text-[10px] text-gray-500">
+                      <p className="text-[10px] text-[#64746A]">
                         {unacknowledgedAlerts.length} unread warnings
                       </p>
                     </div>
-                    <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300">
+                    <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-[#FFF3D8] text-[#8A5A00] border border-[#FADF9E]">
                       Live Telemetry
                     </span>
                   </div>
 
-                  <div className="max-h-64 overflow-y-auto divide-y divide-gray-100">
+                  <div className="max-h-64 overflow-y-auto divide-y divide-[#EFF6F0]">
                     {alerts.slice(0, 4).map((alert) => (
-                      <div key={alert.id} className="p-3 hover:bg-[#fafbf9] transition-colors">
+                      <div key={alert.id} className="p-3 hover:bg-[#F7F8F3] transition-colors">
                         <div className="flex items-start justify-between gap-1.5">
                           <span
                             className={`text-[9px] font-semibold px-1.5 py-0.2 rounded uppercase ${
                               alert.severity === 'critical'
-                                ? 'bg-red-100 text-red-800 border border-red-300'
+                                ? 'bg-[#FCE8E6] text-[#B42318] border border-[#F5C2BF]'
                                 : alert.severity === 'warning'
-                                ? 'bg-amber-100 text-amber-800 border border-amber-300'
-                                : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                                ? 'bg-[#FFF3D8] text-[#8A5A00] border border-[#FADF9E]'
+                                : alert.severity === 'info'
+                                ? 'bg-[#E7F0FC] text-[#285EA8] border border-[#BFD7F8]'
+                                : 'bg-[#E4F4E8] text-[#216847] border border-[#DDEDE1]'
                             }`}
                           >
                             {alert.category}
                           </span>
-                          <span className="text-[9px] text-gray-400">{alert.timestamp}</span>
+                          <span className="text-[9px] text-[#64746A]">{alert.timestamp}</span>
                         </div>
-                        <p className="text-xs font-semibold text-gray-900 mt-1">{alert.plotName}</p>
-                        <p className="text-[11px] text-gray-600 mt-0.5 line-clamp-2">{alert.message}</p>
+                        <p className="text-xs font-semibold text-[#123D2B] mt-1">{alert.plotName}</p>
+                        <p className="text-[11px] text-[#26372E] mt-0.5 line-clamp-2">{alert.message}</p>
                         {!alert.acknowledged && (
                           <div className="mt-2 flex justify-end">
                             <button
                               onClick={() => onAcknowledgeAlert(alert.id)}
-                              className="text-[10px] font-medium text-[#2d6a4f] hover:text-[#1b4332] flex items-center gap-1 cursor-pointer"
+                              className="text-[10px] font-semibold text-[#216847] hover:text-[#18573A] flex items-center gap-1 cursor-pointer"
                             >
                               <Check className="w-3 h-3" /> Acknowledge
                             </button>
@@ -288,10 +289,10 @@ export const Header: React.FC<HeaderProps> = ({
                     ))}
                   </div>
 
-                  <div className="px-3 py-2 bg-[#f6f7f4] border-t border-[#e1e6dc] text-center">
+                  <div className="px-3 py-2 bg-[#F7F8F3] border-t border-[#E3E9E3] text-center">
                     <button
                       onClick={() => setShowAlertsDropdown(false)}
-                      className="text-xs font-semibold text-[#2d6a4f] hover:underline cursor-pointer"
+                      className="text-xs font-semibold text-[#216847] hover:underline cursor-pointer"
                     >
                       Close Notifications
                     </button>
@@ -301,23 +302,23 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             {/* User Profile Avatar & Dropdown Trigger */}
-            <div className="relative pl-1 sm:pl-2 border-l border-[#2d6a4f]/60">
+            <div className="relative pl-1 sm:pl-2 border-l border-[#216847]/60">
               {currentUser ? (
                 <button
                   type="button"
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
-                  className="flex items-center gap-2 p-1 rounded-lg hover:bg-[#1b4332] transition-colors cursor-pointer group text-left"
+                  className="flex items-center gap-2 p-1 rounded-lg hover:bg-[#0C3021] transition-colors cursor-pointer group text-left"
                   title="Click to view Account / Login / Register"
                 >
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#2d6a4f] border-2 border-[#52b788] group-hover:border-white flex items-center justify-center text-xs font-bold text-white shadow-xs transition-all ring-2 ring-transparent group-hover:ring-[#52b788]/50">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#216847] border-2 border-[#DDEDE1] group-hover:border-white flex items-center justify-center text-xs font-bold text-white shadow-xs transition-all ring-2 ring-transparent group-hover:ring-[#DDEDE1]/50">
                     {currentUser.avatarInitials}
                   </div>
                   <div className="hidden lg:block text-left">
                     <p className="text-xs font-semibold text-white leading-tight flex items-center gap-1">
                       <span>{currentUser.name}</span>
-                      <ChevronDown className="w-3 h-3 text-[#a7c5b2]" />
+                      <ChevronDown className="w-3 h-3 text-[#DDEDE1]/70" />
                     </p>
-                    <p className="text-[10px] text-[#a7c5b2] leading-tight">
+                    <p className="text-[10px] text-[#DDEDE1]/80 leading-tight">
                       {currentUser.title}
                     </p>
                   </div>
@@ -327,7 +328,7 @@ export const Header: React.FC<HeaderProps> = ({
                   <button
                     type="button"
                     onClick={() => onOpenAuthModal('login')}
-                    className="px-2.5 py-1 text-xs font-semibold bg-[#2d6a4f] hover:bg-[#387a5a] text-white rounded-md transition-colors flex items-center gap-1"
+                    className="px-2.5 py-1 text-xs font-semibold bg-[#216847] hover:bg-[#18573A] text-white rounded-md transition-colors flex items-center gap-1 cursor-pointer shadow-xs"
                   >
                     <LogIn className="w-3.5 h-3.5" />
                     <span>Sign In</span>
@@ -335,7 +336,7 @@ export const Header: React.FC<HeaderProps> = ({
                   <button
                     type="button"
                     onClick={() => onOpenAuthModal('register')}
-                    className="hidden sm:inline-block px-2.5 py-1 text-xs font-semibold bg-white text-[#143823] hover:bg-gray-100 rounded-md transition-colors"
+                    className="hidden sm:inline-block px-2.5 py-1 text-xs font-semibold bg-white text-[#123D2B] hover:bg-[#EFF6F0] rounded-md transition-colors cursor-pointer"
                   >
                     Register
                   </button>
@@ -361,18 +362,18 @@ export const Header: React.FC<HeaderProps> = ({
         {mobileSearchVisible && (
           <div className="xl:hidden pb-3 pt-1">
             <div className="relative">
-              <Search className="w-4 h-4 text-[#8ba394] absolute left-3 top-2 pointer-events-none" />
+              <Search className="w-4 h-4 text-[#DDEDE1]/60 absolute left-3 top-2 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
                 placeholder="Search plots, farmers, alerts..."
-                className="w-full pl-9 pr-8 py-1.5 bg-[#0f2a1b] border border-[#2d6a4f] rounded-md text-xs text-white placeholder-[#8ba394] focus:outline-none focus:ring-1 focus:ring-[#74c69d]"
+                className="w-full pl-9 pr-8 py-1.5 bg-[#0C3021] border border-[#216847] rounded-md text-xs text-white placeholder-[#DDEDE1]/60 focus:outline-none focus:ring-1 focus:ring-[#DDEDE1]"
               />
               {searchQuery && (
                 <button
                   onClick={() => onSearchChange('')}
-                  className="absolute right-2.5 top-1.5 text-xs text-[#8ba394] hover:text-white"
+                  className="absolute right-2.5 top-1.5 text-xs text-[#DDEDE1]/70 hover:text-white"
                 >
                   ×
                 </button>

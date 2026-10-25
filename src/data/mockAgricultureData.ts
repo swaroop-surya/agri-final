@@ -505,11 +505,11 @@ export const CROP_DIAGNOSTIC_SAMPLES: CropDiagnosticSample[] = [
 ];
 
 export const REGIONAL_CROPS_STATS = [
-  { crop: 'Corn / Maize', acreage: 6240, percent: 42, color: '#2d6a4f', forecastTons: 76800, pace: '+3.4%' },
-  { crop: 'Soybeans', acreage: 4160, percent: 28, color: '#40916c', forecastTons: 51200, pace: '+1.8%' },
-  { crop: 'Winter Wheat', acreage: 2680, percent: 18, color: '#b45309', forecastTons: 32900, pace: '-0.5%' },
-  { crop: 'Cotton', acreage: 1190, percent: 8, color: '#74c69d', forecastTons: 14600, pace: '+0.2%' },
-  { crop: 'Tomatoes & Veg', acreage: 580, percent: 4, color: '#d97706', forecastTons: 6900, pace: '+5.1%' },
+  { crop: 'Corn / Maize', acreage: 6240, percent: 42, color: '#216847', forecastTons: 76800, pace: '+3.4%' },
+  { crop: 'Soybeans', acreage: 4160, percent: 28, color: '#285EA8', forecastTons: 51200, pace: '+1.8%' },
+  { crop: 'Winter Wheat', acreage: 2680, percent: 18, color: '#D5A441', forecastTons: 32900, pace: '-0.5%' },
+  { crop: 'Cotton', acreage: 1190, percent: 8, color: '#123D2B', forecastTons: 14600, pace: '+0.2%' },
+  { crop: 'Tomatoes & Veg', acreage: 580, percent: 4, color: '#8A5A00', forecastTons: 6900, pace: '+5.1%' },
 ];
 
 export const REGIONAL_ZONES_SUMMARY = [

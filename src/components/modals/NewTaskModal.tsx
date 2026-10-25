@@ -45,21 +45,21 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-      <div className="bg-white rounded-lg border border-[#cbd5c5] shadow-2xl max-w-md w-full overflow-hidden">
+      <div className="bg-[#FFFFFF] rounded-lg border border-[#E3E9E3] shadow-2xl max-w-md w-full overflow-hidden">
         {/* Header */}
-        <div className="bg-[#143823] text-white px-5 py-4 flex items-center justify-between">
+        <div className="bg-[#123D2B] text-white px-5 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded bg-[#2d6a4f]">
-              <ClipboardList className="w-5 h-5 text-[#d8f3dc]" />
+            <div className="p-2 rounded bg-[#216847]">
+              <ClipboardList className="w-5 h-5 text-[#DDEDE1]" />
             </div>
             <div>
               <h3 className="text-base font-semibold">Schedule Agronomic Task</h3>
-              <p className="text-xs text-[#a7c5b2]">Farm Work Order & Scouting Log</p>
+              <p className="text-xs text-[#DDEDE1]/80">Farm Work Order & Scouting Log</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-[#a7c5b2] hover:text-white hover:bg-[#1b4332]"
+            className="p-1 rounded-md text-[#DDEDE1]/70 hover:text-white hover:bg-[#0C3021]"
           >
             <X className="w-5 h-5" />
           </button>
@@ -67,9 +67,9 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
 
         {/* Form Body */}
         <form onSubmit={handleSubmit}>
-          <div className="p-5 space-y-3.5 text-xs text-[#2b3a2f]">
+          <div className="p-5 space-y-3.5 text-xs text-[#26372E]">
             <div>
-              <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+              <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
                 Task Title / Directive
               </label>
               <input
@@ -78,19 +78,19 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., Post-emergence herbicide spray on ridge border"
-                className="w-full px-3 py-2 bg-[#f8f9f6] border border-[#d1d8cc] rounded-md text-xs font-medium text-[#143823] focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+                className="w-full px-3 py-2 bg-[#F7F8F3] border border-[#E3E9E3] rounded-md text-xs font-medium text-[#26372E] focus:outline-none focus:ring-1 focus:ring-[#216847]"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+                <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
                   Target Field / Plot
                 </label>
                 <select
                   value={plotName}
                   onChange={(e) => setPlotName(e.target.value)}
-                  className="w-full px-2.5 py-2 bg-[#f8f9f6] border border-[#d1d8cc] rounded-md text-xs font-medium text-[#143823] focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+                  className="w-full px-2.5 py-2 bg-[#F7F8F3] border border-[#E3E9E3] rounded-md text-xs font-medium text-[#26372E] focus:outline-none focus:ring-1 focus:ring-[#216847]"
                 >
                   {plots.map((p) => (
                     <option key={p.id} value={p.name}>
@@ -101,13 +101,13 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
               </div>
 
               <div>
-                <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+                <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
                   Category
                 </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value as any)}
-                  className="w-full px-2.5 py-2 bg-[#f8f9f6] border border-[#d1d8cc] rounded-md text-xs font-medium text-[#143823] focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+                  className="w-full px-2.5 py-2 bg-[#F7F8F3] border border-[#E3E9E3] rounded-md text-xs font-medium text-[#26372E] focus:outline-none focus:ring-1 focus:ring-[#216847]"
                 >
                   <option value="Fertilization">Fertilization</option>
                   <option value="Irrigation">Irrigation</option>
@@ -121,13 +121,13 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+                <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
                   Priority Level
                 </label>
                 <select
                   value={priority}
                   onChange={(e) => setPriority(e.target.value as any)}
-                  className="w-full px-2.5 py-2 bg-[#f8f9f6] border border-[#d1d8cc] rounded-md text-xs font-medium text-[#143823] focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+                  className="w-full px-2.5 py-2 bg-[#F7F8F3] border border-[#E3E9E3] rounded-md text-xs font-medium text-[#26372E] focus:outline-none focus:ring-1 focus:ring-[#216847]"
                 >
                   <option value="High">High Priority</option>
                   <option value="Medium">Medium Priority</option>
@@ -136,43 +136,43 @@ export const NewTaskModal: React.FC<NewTaskModalProps> = ({
               </div>
 
               <div>
-                <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+                <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
                   Due Date
                 </label>
                 <input
                   type="date"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="w-full px-2.5 py-2 bg-[#f8f9f6] border border-[#d1d8cc] rounded-md text-xs font-medium text-[#143823] focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+                  className="w-full px-2.5 py-2 bg-[#F7F8F3] border border-[#E3E9E3] rounded-md text-xs font-medium text-[#26372E] focus:outline-none focus:ring-1 focus:ring-[#216847]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block font-semibold uppercase text-[10px] text-[#5f7464] tracking-wider mb-1">
+              <label className="block font-semibold uppercase text-[10px] text-[#64746A] tracking-wider mb-1">
                 Assignee / Operator
               </label>
               <input
                 type="text"
                 value={assignee}
                 onChange={(e) => setAssignee(e.target.value)}
-                className="w-full px-3 py-2 bg-[#f8f9f6] border border-[#d1d8cc] rounded-md text-xs font-medium text-[#143823] focus:outline-none focus:ring-1 focus:ring-[#2d6a4f]"
+                className="w-full px-3 py-2 bg-[#F7F8F3] border border-[#E3E9E3] rounded-md text-xs font-medium text-[#26372E] focus:outline-none focus:ring-1 focus:ring-[#216847]"
               />
             </div>
           </div>
 
           {/* Footer */}
-          <div className="px-5 py-3.5 bg-[#f6f7f4] border-t border-[#e1e6dc] flex items-center justify-end gap-2.5">
+          <div className="px-5 py-3.5 bg-[#F7F8F3] border-t border-[#E3E9E3] flex items-center justify-end gap-2.5">
             <button
               type="button"
               onClick={onClose}
-              className="px-3.5 py-1.5 rounded-md text-xs font-medium text-[#5f7464] hover:text-[#143823]"
+              className="px-3.5 py-1.5 rounded-md text-xs font-medium text-[#64746A] hover:text-[#123D2B] hover:bg-[#EFF6F0]"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-[#2d6a4f] hover:bg-[#1b4332] text-white text-xs font-semibold shadow-xs transition-colors"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-[#216847] hover:bg-[#18573A] text-white text-xs font-semibold shadow-xs transition-colors"
             >
               <CheckCircle2 className="w-4 h-4" />
               <span>Create Task</span>
