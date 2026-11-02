@@ -27,7 +27,7 @@ import { AuthUser, UserRole } from '../../types/agriculture';
 
 interface LandingPageProps {
   onOpenAuthModal: (mode: 'login' | 'register') => void;
-  onQuickDemoLogin: (role: UserRole) => void;
+  onQuickDemoLogin?: (role: UserRole) => void;
   currentUser: AuthUser | null;
   onGoToDashboard: () => void;
   onLogout?: () => void;
@@ -35,7 +35,6 @@ interface LandingPageProps {
 
 export const LandingPage: React.FC<LandingPageProps> = ({
   onOpenAuthModal,
-  onQuickDemoLogin,
   currentUser,
   onGoToDashboard,
   onLogout,
@@ -256,78 +255,42 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 Monitor 3-depth capacitive soil moisture, control automated solenoid irrigation networks, and run AI foliar crop disease diagnostics in real time.
               </p>
 
-              {/* Primary Call to Action Buttons */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2">
-                <button
-                  onClick={() => onOpenAuthModal('register')}
-                  className="px-6 py-3 rounded-lg bg-[#216847] hover:bg-[#18573A] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer border border-[#216847]"
-                >
-                  <span>Get Started (Register)</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={() => onOpenAuthModal('login')}
-                  className="px-6 py-3 rounded-lg bg-[#0C3021] hover:bg-[#18573A] border border-[#216847] text-white font-semibold text-sm transition-all cursor-pointer flex items-center gap-2"
-                >
-                  <LogIn className="w-4 h-4 text-[#DDEDE1]" />
-                  <span>Login / Demo Selector</span>
-                </button>
-              </div>
-
-              {/* Instant 1-Click Interactive Demo Launcher Cards */}
-              <div className="pt-4">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#DDEDE1]/80 mb-2.5">
-                  Launch Interactive Demo Workstation:
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto lg:mx-0">
-                  <button
-                    type="button"
-                    onClick={() => onQuickDemoLogin('admin')}
-                    className="p-3.5 rounded-xl bg-[#0C3021]/90 hover:bg-[#18573A] border border-[#216847] text-left transition-all group shadow-sm cursor-pointer"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="p-1.5 rounded-md bg-[#216847] text-white">
-                          <ShieldCheck className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold text-white group-hover:text-[#DDEDE1] transition-colors">
-                            Administrator Demo
-                          </div>
-                          <div className="text-[10px] text-[#DDEDE1]/70">Director Eleanor Vance</div>
-                        </div>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-[#DDEDE1] group-hover:translate-x-1 transition-transform" />
+              {/* Enterprise Architecture & Telemetry Capabilities Strip */}
+              <div className="pt-3 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl mx-auto lg:mx-0">
+                <div className="p-3.5 rounded-xl bg-[#0C3021]/80 border border-[#216847]/70 text-left">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <div className="p-1 rounded bg-[#216847] text-white">
+                      <Radio className="w-3.5 h-3.5 text-[#52b788]" />
                     </div>
-                    <p className="text-[10px] text-[#DDEDE1]/60 mt-2">
-                      Regional acreage distribution, pump stations, zone matrix, and producer directory.
-                    </p>
-                  </button>
+                    <span className="text-xs font-bold text-white">Sub-GHz IoT</span>
+                  </div>
+                  <p className="text-[11px] text-[#DDEDE1]/75 leading-relaxed">
+                    15km LoRaWAN radio coverage with 15-minute telemetry sync cadence.
+                  </p>
+                </div>
 
-                  <button
-                    type="button"
-                    onClick={() => onQuickDemoLogin('farmer')}
-                    className="p-3.5 rounded-xl bg-[#0C3021]/90 hover:bg-[#18573A] border border-[#216847] text-left transition-all group shadow-sm cursor-pointer"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="p-1.5 rounded-md bg-[#216847] text-white">
-                          <Tractor className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold text-white group-hover:text-[#DDEDE1] transition-colors">
-                            Farmer Operator Demo
-                          </div>
-                          <div className="text-[10px] text-[#DDEDE1]/70">Henderson Crest Farm</div>
-                        </div>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-[#DDEDE1] group-hover:translate-x-1 transition-transform" />
+                <div className="p-3.5 rounded-xl bg-[#0C3021]/80 border border-[#216847]/70 text-left">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <div className="p-1 rounded bg-[#216847] text-white">
+                      <Droplets className="w-3.5 h-3.5 text-[#52b788]" />
                     </div>
-                    <p className="text-[10px] text-[#DDEDE1]/60 mt-2">
-                      3-depth soil probes, live solenoid valve toggle, ET0 weather, and foliar disease AI scan.
-                    </p>
-                  </button>
+                    <span className="text-xs font-bold text-white">Auto Solenoids</span>
+                  </div>
+                  <p className="text-[11px] text-[#DDEDE1]/75 leading-relaxed">
+                    Soil-capacitance automated valves with live ET0 weather overrides.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-[#0C3021]/80 border border-[#216847]/70 text-left">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <div className="p-1 rounded bg-[#216847] text-white">
+                      <ScanLine className="w-3.5 h-3.5 text-[#52b788]" />
+                    </div>
+                    <span className="text-xs font-bold text-white">Foliar AI Vision</span>
+                  </div>
+                  <p className="text-[11px] text-[#DDEDE1]/75 leading-relaxed">
+                    Multispectral leaf pathology and early fungal lesion diagnostics.
+                  </p>
                 </div>
               </div>
             </div>
@@ -563,13 +526,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                       <span>Automated LoRa packet sync every 15 minutes with 99.8% gateway uptime.</span>
                     </li>
                   </ul>
-                  <button
-                    onClick={() => onQuickDemoLogin('farmer')}
-                    className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 bg-[#216847] hover:bg-[#18573A] text-white text-xs font-semibold rounded-lg cursor-pointer shadow-xs"
-                  >
-                    <span>Test Soil Telemetry in Demo</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
                 </div>
                 <div className="bg-[#F7F8F3] p-5 rounded-xl border border-[#E3E9E3] space-y-3">
                   <div className="font-semibold text-xs text-[#123D2B]">Live Field Sample — Plot #14</div>
@@ -627,13 +583,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                       <span>Weather integration pauses irrigation cycles prior to forecasted precipitation.</span>
                     </li>
                   </ul>
-                  <button
-                    onClick={() => onQuickDemoLogin('farmer')}
-                    className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 bg-[#216847] hover:bg-[#18573A] text-white text-xs font-semibold rounded-lg cursor-pointer shadow-xs"
-                  >
-                    <span>Try Solenoid Valve Control</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
                 </div>
                 <div className="bg-[#E4F4E8] p-5 rounded-xl border border-[#DDEDE1] space-y-3">
                   <div className="flex items-center justify-between">
@@ -661,13 +610,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                     Identify early crop stress, chlorosis, and fungal blights before they damage entire harvests.
                     Inspect multispectral images, evaluate confidence scores, and receive immediate agronomic treatment directives.
                   </p>
-                  <button
-                    onClick={() => onQuickDemoLogin('farmer')}
-                    className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 bg-[#216847] hover:bg-[#18573A] text-white text-xs font-semibold rounded-lg cursor-pointer shadow-xs"
-                  >
-                    <span>Test Disease Scanner Demo</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
                 </div>
                 <div className="bg-[#F7F8F3] p-5 rounded-xl border border-[#E3E9E3] space-y-2">
                   <div className="text-xs font-bold text-[#B42318] bg-[#FCE8E6] border border-[#F5C2BF] px-2.5 py-1 rounded inline-block">
@@ -690,13 +632,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   <p className="text-xs sm:text-sm text-[#64746A] leading-relaxed">
                     Empower agricultural district directors and cooperative managers to view projected yields across Maize, Soybeans, Winter Wheat, and specialized crops with real-time pace indicators.
                   </p>
-                  <button
-                    onClick={() => onQuickDemoLogin('admin')}
-                    className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 bg-[#216847] hover:bg-[#18573A] text-white text-xs font-semibold rounded-lg cursor-pointer shadow-xs"
-                  >
-                    <span>Test Administrator Analytics</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
                 </div>
                 <div className="bg-[#F7F8F3] p-5 rounded-xl border border-[#E3E9E3] space-y-2 text-xs">
                   <div className="font-semibold text-[#123D2B]">Current Season Pace:</div>
@@ -768,29 +703,29 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* CTA Banner */}
+      {/* Enterprise Platform Assurance Section */}
       <section className="py-16 bg-[#123D2B] text-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-            Ready to Experience the AgriVision Platform?
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#DDEDE1] bg-[#0C3021] px-3.5 py-1 rounded-full border border-[#216847]">
+            Enterprise Platform Architecture
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            Integrated Agricultural Governance & Field Telemetry
           </h2>
-          <p className="text-sm sm:text-base text-[#DDEDE1]/90 max-w-2xl mx-auto">
-            Create your operator account to manage your field telemetry, or launch an instant 1-click interactive demo.
+          <p className="text-xs sm:text-sm text-[#DDEDE1]/85 max-w-2xl mx-auto leading-relaxed">
+            Providing unified watershed quota oversight for regional authorities and precision soil-to-valve automation for farm operators. Authorized users can access their workstation via the navigation bar above.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <button
-              onClick={() => onOpenAuthModal('register')}
-              className="px-6 py-3 rounded-lg bg-[#216847] hover:bg-[#18573A] text-white font-bold text-sm shadow-md transition-colors cursor-pointer border border-[#216847]"
-            >
-              Get Started (Register Free)
-            </button>
-            <button
-              onClick={() => onOpenAuthModal('login')}
-              className="px-6 py-3 rounded-lg bg-[#0C3021] hover:bg-[#18573A] border border-[#216847] text-white font-semibold text-sm transition-colors cursor-pointer"
-            >
-              Login / Demo Access
-            </button>
+          <div className="pt-3 flex flex-wrap items-center justify-center gap-6 text-[11px] text-[#DDEDE1]/80">
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#52b788]" /> 256-bit Encrypted Telemetry
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#52b788]" /> ISO 11783 (ISOBUS) Compatible
+            </span>
+            <span className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#52b788]" /> 99.8% Gateway Network Uptime
+            </span>
           </div>
         </div>
       </section>
@@ -807,21 +742,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => onOpenAuthModal('login')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Login
-            </button>
-            <button
-              onClick={() => onOpenAuthModal('register')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Register
-            </button>
+            <span className="text-[#DDEDE1]/60">West Valley Agronomic District 4</span>
+            <span className="text-[#DDEDE1]/40">•</span>
             <button
               onClick={() => scrollToSection('home')}
-              className="hover:text-white transition-colors cursor-pointer"
+              className="text-[#DDEDE1] hover:text-white transition-colors cursor-pointer font-medium"
             >
               Back to Top ↑
             </button>

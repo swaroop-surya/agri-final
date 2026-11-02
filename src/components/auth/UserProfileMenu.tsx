@@ -21,7 +21,6 @@ interface UserProfileMenuProps {
   onClose: () => void;
   currentUser: AuthUser;
   onOpenAuthModal: (mode: 'login' | 'register') => void;
-  onRoleSwitch: (role: UserRole) => void;
   onLogout: () => void;
 }
 
@@ -30,7 +29,6 @@ export const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
   onClose,
   currentUser,
   onOpenAuthModal,
-  onRoleSwitch,
   onLogout,
 }) => {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -84,44 +82,24 @@ export const UserProfileMenu: React.FC<UserProfileMenuProps> = ({
         </div>
       </div>
 
-      {/* Role Toggle Row */}
+      {/* Role Console Status Note */}
       <div className="p-3 bg-[#EFF6F0] border-b border-[#E3E9E3]">
-        <div className="text-[10px] uppercase font-bold text-[#64746A] tracking-wider mb-1.5">
-          Active Perspective Switcher
+        <div className="flex items-center justify-between text-[11px] font-bold text-[#123D2B]">
+          <span className="flex items-center gap-1.5">
+            {currentUser.role === 'admin' ? (
+              <ShieldCheck className="w-3.5 h-3.5 text-[#216847]" />
+            ) : (
+              <Tractor className="w-3.5 h-3.5 text-[#216847]" />
+            )}
+            <span>Current Terminal:</span>
+          </span>
+          <span className="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-white border border-[#DDEDE1] text-[#216847]">
+            {currentUser.role === 'admin' ? 'Admin Console' : 'Farmer Operator'}
+          </span>
         </div>
-        <div className="grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              onRoleSwitch('admin');
-              onClose();
-            }}
-            className={`p-2 rounded-md border text-left flex items-center gap-2 transition-all ${
-              currentUser.role === 'admin'
-                ? 'bg-[#123D2B] text-white border-[#123D2B] shadow-xs'
-                : 'bg-[#FFFFFF] text-[#26372E] border-[#E3E9E3] hover:bg-[#F7F8F3]'
-            }`}
-          >
-            <ShieldCheck className="w-4 h-4 shrink-0 text-[#216847]" />
-            <div className="text-[11px] font-semibold">Admin View</div>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              onRoleSwitch('farmer');
-              onClose();
-            }}
-            className={`p-2 rounded-md border text-left flex items-center gap-2 transition-all ${
-              currentUser.role === 'farmer'
-                ? 'bg-[#123D2B] text-white border-[#123D2B] shadow-xs'
-                : 'bg-[#FFFFFF] text-[#26372E] border-[#E3E9E3] hover:bg-[#F7F8F3]'
-            }`}
-          >
-            <Tractor className="w-4 h-4 shrink-0 text-[#216847]" />
-            <div className="text-[11px] font-semibold">Farmer View</div>
-          </button>
-        </div>
+        <p className="text-[10px] text-[#64746A] mt-1.5 leading-relaxed">
+          To switch between Administrator and Farmer consoles, please Sign Out and log in with the desired profile or demo credentials.
+        </p>
       </div>
 
       {/* Account Navigation / Actions */}

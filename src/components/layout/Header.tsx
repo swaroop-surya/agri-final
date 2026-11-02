@@ -18,7 +18,7 @@ import { UserProfileMenu } from '../auth/UserProfileMenu';
 
 interface HeaderProps {
   role: UserRole;
-  onRoleChange: (newRole: UserRole) => void;
+  onRoleChange?: (newRole: UserRole) => void;
   alerts: AgroAlert[];
   onAcknowledgeAlert: (alertId: string) => void;
   onOpenExportModal: () => void;
@@ -115,35 +115,25 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* Center: Role Switcher & Season selector */}
+          {/* Center: Active Terminal Status Badge & Season selector */}
           <div className="flex items-center gap-1.5 sm:gap-2">
-            {/* Responsive Role Switcher */}
-            <div className="bg-[#0C3021] p-0.5 sm:p-1 rounded-lg border border-[#216847]/50 flex items-center shadow-inner">
-              <button
-                type="button"
-                onClick={() => onRoleChange('admin')}
-                className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
-                  role === 'admin'
-                    ? 'bg-[#216847] text-white shadow-xs'
-                    : 'text-[#DDEDE1] hover:text-white'
-                }`}
-              >
-                <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                <span className="hidden xs:inline sm:inline">Admin</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => onRoleChange('farmer')}
-                className={`flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
-                  role === 'farmer'
-                    ? 'bg-[#216847] text-white shadow-xs'
-                    : 'text-[#DDEDE1] hover:text-white'
-                }`}
-              >
-                <Tractor className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                <span className="hidden xs:inline sm:inline">Farmer</span>
-              </button>
+            {/* Active Workspace Terminal Badge (Read-only; switch role via logout and login) */}
+            <div className="bg-[#0C3021] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-[#216847]/50 flex items-center gap-1.5 shadow-inner select-none">
+              {role === 'admin' ? (
+                <>
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#52b788] shrink-0" />
+                  <span className="text-[11px] sm:text-xs font-bold text-white tracking-wide">
+                    Admin Terminal
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Tractor className="w-3.5 h-3.5 text-[#52b788] shrink-0" />
+                  <span className="text-[11px] sm:text-xs font-bold text-white tracking-wide">
+                    Farmer Operator
+                  </span>
+                </>
+              )}
             </div>
 
             {/* Season Selector (Desktop & Tablet) */}
@@ -350,7 +340,6 @@ export const Header: React.FC<HeaderProps> = ({
                   onClose={() => setShowProfileMenu(false)}
                   currentUser={currentUser}
                   onOpenAuthModal={onOpenAuthModal}
-                  onRoleSwitch={onRoleChange}
                   onLogout={onLogout}
                 />
               )}
